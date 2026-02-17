@@ -1,0 +1,124 @@
+﻿@* @model List<NaatsWebApp.Models.NaatKhuwaan>
+@using System.Data.SqlClient;
+@{
+    var cities = new List<SelectListItem>();
+    DBAccess db = new DBAccess();
+    db.OpenConnection();
+    string q = "select distinct city from naatkhuwaan";
+    SqlDataReader sdr = db.GetData(q);
+    while (sdr.Read())
+    {
+        cities.Add(new SelectListItem { Text = sdr[0].ToString(), Value = sdr[0].ToString() });
+    }
+    sdr.Close();
+    db.CloseConnection();
+}
+@* <a href="/NaatKhuwaan/SignUp">Create New</a> 
+@Html.ActionLink("Create New","SignUp")
+<h1>All Naatkhuwaan</h1>
+@using (Html.BeginForm())
+{
+    <b>Select City</b>@Html.DropDownList("city",cities,"Select");
+    <input type="submit" value="Search"/>
+}
+<table class="table">
+    <tr><th>Id</th><th>Name</th><th>City</th><th>Action</th></tr>
+    @foreach(var nk in Model)
+    {
+        <tr>
+            <td>@nk.nkid</td>
+            <td>@nk.name</td>
+            <td>@nk.city</td>
+            <td class="button">@Html.ActionLink("Delete", "Delete", new { nkid = nk.nkid }, new {@class= "btn btn-danger "})</td>
+        </tr>
+    }
+
+</table> *@
+
+@model List<NaatsWebApp.Models.NaatKhuwaan>
+@using System.Data.SqlClient;
+
+@{
+    var cities = new List<SelectListItem>();
+    DBAccess db = new DBAccess();
+    db.OpenConnection();
+    string q = "select distinct city from naatkhuwaan";
+    SqlDataReader sdr = db.GetData(q);
+    while (sdr.Read())
+    {
+        cities.Add(new SelectListItem
+        {
+            Text = sdr[0].ToString(),
+            Value = sdr[0].ToString()
+        });
+    }
+    sdr.Close();
+    db.CloseConnection();
+}
+
+<div class="container mt-5">
+
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">🎤 All NaatKhuwaan</h2>
+        @Html.ActionLink("➕ Create New","SignUp", null,
+        new { @class = "btn btn-success px-4 shadow-sm" })
+    </div>
+
+    <!-- Search Section -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                <div class="row align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Select City</label>
+                        @Html.DropDownList("city", cities, "Select City",
+                        new { @class = "form-select" })
+                </div>
+
+                <div class="col-md-2">
+                    <input type="submit" value="🔍 Search"
+                           class="btn btn-primary w-100 mt-2" />
+                </div>
+            </div>
+                        }
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="card shadow">
+        <div class="card-body">
+
+            <table class="table table-hover table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th width="120">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var nk in Model)
+                    {
+                        <tr>
+                            <td>@nk.nkid</td>
+                            <td class="fw-semibold text-capitalize">@nk.name</td>
+                            <td>@nk.city</td>
+                            <td>
+                                @Html.ActionLink("🗑 Delete", "Delete",
+                                new { nkid = nk.nkid },
+                                                        new { @class = "btn btn-danger btn-sm px-3 shadow-sm" })
+                        </td>
+                    </tr>
+                                        }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
