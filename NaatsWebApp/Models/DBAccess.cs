@@ -30,6 +30,7 @@ namespace NaatsWebApp.Models
         public void IUD(string query)
         {
             OpenConnection();
+
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
             CloseConnection();

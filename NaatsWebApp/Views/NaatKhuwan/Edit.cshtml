@@ -1,0 +1,70 @@
+﻿@model NaatsWebApp.Models.NaatKhuwaan
+
+<h2 class="text-center mb-4">Update NaatKhuawan</h2>
+
+@{
+    List<SelectListItem> cityList = new List<SelectListItem>();
+    cityList.Add(new SelectListItem { Text = "Rawalpindi", Value = "Rawalpindi" });
+    cityList.Add(new SelectListItem { Text = "Mansehra", Value = "Mansehra" });
+    cityList.Add(new SelectListItem { Text = "Islamabad", Value = "Islamabad" });
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+
+                @using (Html.BeginForm())
+                {
+                    <!-- Name -->
+                    <div class="mb-3">
+                        @Html.LabelFor(model => model.name, new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.name, new { @class = "form-control", placeholder = "Enter Name" })
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.name)</span>
+                    </div>
+
+                    <!-- City -->
+                    <div class="mb-3">
+                        @Html.LabelFor(model => model.city, new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.city, cityList, "-- Select City --", new { @class = "form-select" })
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.city)</span>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label><br />
+                        @Html.RadioButtonFor(model => model.gender, "M") Male
+                        &nbsp;&nbsp;
+                        @Html.RadioButtonFor(model => model.gender, "F") Female
+
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.gender)</span>
+                    </div>
+
+                    <!-- Is Alive -->
+                    <div class="mb-3">
+                        @Html.LabelFor(model => model.isAlive, new { @class = "form-label" })
+                        @Html.CheckBoxFor(model => model.isAlive)
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        @Html.LabelFor(model => model.email, new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.email, new { @class = "form-control", placeholder = "Enter Email" })
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.email)</span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="row mt-3">
+                        <div class="col">
+                            <a asp-action="AllNK" class="btn btn-secondary w-100">Back</a>
+                        </div>
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

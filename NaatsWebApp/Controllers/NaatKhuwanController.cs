@@ -81,5 +81,52 @@ namespace NaatsWebApp.Controllers
             db.CloseConnection();
             return RedirectToAction("AllNK");
         }
+        [HttpGet]
+        public IActionResult Detail(string nkid)
+        {           
+            db.OpenConnection();
+            string q = "Select nkid,name,city,gender,isAlive,email from naatkhuwaan where nkid='" + nkid + "'";
+            SqlDataReader sdr = db.GetData(q);
+            sdr.Read();       
+            NaatKhuwaan nk = new NaatKhuwaan();
+            nk.nkid = sdr["nkid"].ToString();
+            nk.name = sdr["name"].ToString();
+            nk.city = sdr["city"].ToString();
+            nk.gender = char.Parse(sdr["gender"].ToString());
+            nk.isAlive = bool.Parse(sdr["isAlive"].ToString());
+            nk.email = sdr["email"].ToString();            
+            sdr.Close();
+            db.CloseConnection();
+            return View(nk);
+        }
+        [HttpGet]
+        public IActionResult Edit(string nkid)
+        {
+            db.OpenConnection();
+            string q = "Select nkid,name,city,gender,isAlive,email from naatkhuwaan where nkid='" + nkid + "'";
+            SqlDataReader sdr = db.GetData(q);
+            sdr.Read();
+            NaatKhuwaan nk = new NaatKhuwaan();
+            nk.nkid = sdr["nkid"].ToString();
+            nk.name = sdr["name"].ToString();
+            nk.city = sdr["city"].ToString();
+            nk.gender = char.Parse(sdr["gender"].ToString());
+            nk.isAlive = bool.Parse(sdr["isAlive"].ToString());
+            nk.email = sdr["email"].ToString();
+            sdr.Close();
+            db.CloseConnection();
+            return View(nk);
+
+        }
+        [HttpPost]
+        public IActionResult Edit(NaatKhuwaan nk)
+        {            
+            DBAccess Db = new DBAccess();                        
+            Db.OpenConnection();
+            string q = "update NaatKhuwaan set name='" + nk.name + "',city='" + nk.city + "',gender='" + nk.gender + "',isAlive='" + nk.isAlive + "',email='" + nk.email + "' where nkid='" + nk.nkid + "'";
+            Db.IUD(q);
+            Db.CloseConnection();
+            return RedirectToAction("AllNk");
+        }
     }
 }

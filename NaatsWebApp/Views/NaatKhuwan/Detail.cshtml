@@ -1,0 +1,84 @@
+﻿@* @model NaatsWebApp.Models.NaatKhuwaan
+
+<h1>Detail</h1>
+<b>Nkid=</b>@Model.nkid<br />
+<b>Nmae=</b>@Model.name<br />
+<b>City=</b>@Model.city<br />
+<b>Gender=</b>@Model.gender<br />
+<b>Is Alive=</b>@Model.isAlive<br />
+<b>Email=</b>@Model.email<br />
+ *@
+
+@model NaatsWebApp.Models.NaatKhuwaan
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">🎤 NaatKhuwaan Detail</h3>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Nkid:</div>
+                <div class="col-md-8">@Model.nkid</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Name:</div>
+                <div class="col-md-8">@Model.name</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">City:</div>
+                <div class="col-md-8">@Model.city</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Gender:</div>
+                <div class="col-md-8">@Model.gender</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Is Alive:</div>
+                <div class="col-md-8">
+                    @if (Model.isAlive)
+                    {
+                        <span class="badge bg-success">Yes</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">No</span>
+                    }
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Email:</div>
+                <div class="col-md-8">@Model.email</div>
+            </div>
+
+        </div>
+
+        @* <div class="card-footer text-end">
+            <a href="/NaatKhuwan/AllNK" class="btn btn-secondary">
+                ⬅ Back
+            </a
+             
+        </div> *@
+        <div class="card-footer d-flex justify-content-between">
+            <a asp-controller="NaatKhuwan" asp-action="AllNK" class="btn btn-secondary px-4">
+                Back
+            </a>
+            @* <a asp-controller="NaatKhuwan" asp-action="AllNK" class="btn btn-secondary px-4">
+                ⬅ Back
+            </a>
+            <button type="submit" class="btn btn-primary px-4">
+                Update Record
+            </button> *@
+        </div>        
+    </div>
+
+</div>
