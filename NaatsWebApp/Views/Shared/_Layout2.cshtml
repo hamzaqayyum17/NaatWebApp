@@ -1,0 +1,225 @@
+﻿@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NaatKhuwaanWebApp</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542810634-71277d95dcbb');
+            background-size: cover;
+            background-position: center;
+            height: 450px;
+            color: white;
+        }
+
+        .navbar {
+            background-color: #0d3b2e !important;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: #ffd700 !important;
+            }
+
+        .footer {
+            background-color: #0d3b2e;
+            color: white;
+        }
+
+        .btn-gold {
+            background-color: #c8a951;
+            color: white;
+            border: none;
+        }
+
+            .btn-gold:hover {
+                background-color: #a8893e;
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">NaatKhuwaanWebApp</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/NaatKhuwan/AllNk">NaatKhuwans</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/NaatKhuwan/SignUp">Register</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/NaatKhuwan/Login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero-section d-flex align-items-center">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">Welcome to NaatKhuwaanWebApp</h1>
+            <p class="lead mt-3">
+                A Platform to Connect & Promote Beautiful Voices of Naat
+            </p>
+            <a href="/NaatKhuwan/SignUp" class="btn btn-gold btn-lg mt-3">
+                Join Now
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="container my-5">
+        @RenderBody()
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer text-center py-4">
+        <div class="container">
+            <h5 class="fw-bold">NaatKhuwaanWebApp</h5>
+            <p class="mb-1">Promoting the Art of Naat Recitation</p>
+            <small>© @DateTime.Now.Year All Rights Reserved</small>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html> *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NaatKhuwaanWebApp</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: linear-gradient(90deg, #0d3b2e, #145c43);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .nav-link {
+            color: white !important;
+            margin-left: 15px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+            .nav-link:hover {
+                color: #ffd700 !important;
+            }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            padding-top: 100px; /* Space for fixed navbar */
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0d3b2e;
+            color: white;
+        }
+
+            .footer a {
+                color: #ffd700;
+                text-decoration: none;
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand text-white" href="/">NaatKhuwaan</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/NaatKhuwan/AllNk">NaatKhuwans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/NaatKhuwan/SignUp">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/NaatKhuwan/Login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN BODY ===== -->
+    <div class="main-content container">
+        @RenderBody()
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer text-center py-4">
+        <div class="container">
+            <h5 class="fw-bold">NaatKhuwaanWebApp</h5>
+            <p class="mb-1">Promoting the Art of Naat Recitation</p>
+            <small>© @DateTime.Now.Year All Rights Reserved</small>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
