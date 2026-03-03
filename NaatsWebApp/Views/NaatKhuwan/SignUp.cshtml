@@ -7,11 +7,12 @@
     cityList.Add(new SelectListItem { Text = "Rawalpindi", Value = "Rawalpindi" });
     cityList.Add(new SelectListItem { Text = "Mansehra", Value = "Mansehra" });
     cityList.Add(new SelectListItem { Text = "Islamabad", Value = "Islamabad" });
+    cityList.Add(new SelectListItem { Text = "Karachi", Value = "Karachi" });
 }
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6" style="width:70%">
             <div class="card shadow p-4">
 
                 @using (Html.BeginForm())
@@ -70,3 +71,11 @@
         </div>
     </div>
 </div>
+@if (Context.Request.Method == "POST")
+{
+    <div class="post-info">
+        <h5 class="fw-bold">Registration Successful 🎉</h5>
+        <p><b>User ID:</b> @Model.nkid</p>
+        <p><b>Password:</b> @Model.password</p>
+    </div>
+}

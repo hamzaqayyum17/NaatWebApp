@@ -4,6 +4,7 @@ namespace NaatsWebApp.Models
 {
     public class NaatKhuwaan
     {
+        [Display(Name = "Nk-ID")]
         public String? nkid { get; set; }
         [Required]
         [Display(Name = "Name")]

@@ -27,7 +27,7 @@ namespace NaatsWebApp.Controllers
                 string q = "insert into NaatKhuwaan Values('" + nk.nkid + "','" + nk.name + "','" + nk.city + "','" + nk.gender + "','" + nk.isAlive + "','" + nk.email + "','" + nk.password + "')";
                 Db.IUD(q);
                 Db.CloseConnection();
-                return View();
+                
             }
             return View(nk);
         }
@@ -128,5 +128,36 @@ namespace NaatsWebApp.Controllers
             Db.CloseConnection();
             return RedirectToAction("AllNk");
         }
+        [HttpGet]
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SignIn(string nkid, string password)
+        {
+            db.OpenConnection();
+            string q = $"Select nkid,name from naatkhuwaan where nkid='{ nkid }' and password ='{ password }'";
+            SqlDataReader sdr = db.GetData(q);
+            sdr.Read();
+            if (sdr.HasRows)
+            {
+                HttpContext.Session.SetString("nkid", sdr["nkid"].ToString());
+                HttpContext.Session.SetString("name", sdr["name"].ToString());
+            }            
+            sdr.Close();
+            db.CloseConnection();            
+            return RedirectToAction("Dashboard");
+        }
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            string nkid= HttpContext.Session.GetString("nkid");
+            if (nkid == null)
+            {
+                return RedirectToAction("SignUp");
+            }
+            return View();
+        }        
     }
 }

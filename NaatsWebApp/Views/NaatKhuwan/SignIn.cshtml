@@ -1,0 +1,59 @@
+﻿@model NaatsWebApp.Models.NaatKhuwaan
+
+<h2 class="text-center mb-4 login-title">Login NaatKhuawan</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6" style="width:70%">
+            <div class="card login-card p-4">
+
+                @* Optional Message Box *@
+                @if (ViewBag.Message != null)
+                {
+                    <div class="message-box">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                @using (Html.BeginForm())
+                {
+                    <!-- User ID -->
+                    <div class="mb-3">
+                        @Html.LabelFor(model => model.nkid, new { @class = "form-label" })
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+                            @Html.TextBoxFor(model => model.nkid, new { @class = "form-control", placeholder = "Enter User ID" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.nkid)</span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        @Html.LabelFor(model => model.password, new { @class = "form-label" })
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill"></i>
+                            </span>
+                            @Html.PasswordFor(model => model.password, new { @class = "form-control", placeholder = "Enter Password" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.password)</span>
+                    </div>
+
+                    <!-- Login Button -->
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </div>
+
+                    <!-- Register Link -->
+                    <div class="text-center mt-3 register-link">
+                        Don’t have an account?
+                        <a href="/NaatKhuwan/SignUp">Create Account</a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

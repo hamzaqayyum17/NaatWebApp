@@ -35,7 +35,7 @@
 
 </table> *@
 
-@model List<NaatsWebApp.Models.NaatKhuwaan>
+@* @model List<NaatsWebApp.Models.NaatKhuwaan>
 @using System.Data.SqlClient;
 
 
@@ -122,5 +122,109 @@
         </div>
     </div>
 
-</div>
+</div> *@
+@model List<NaatsWebApp.Models.NaatKhuwaan>
+@using System.Data.SqlClient;
 
+@{
+    var cities = new List<SelectListItem>();
+    DBAccess db = new DBAccess();
+    db.OpenConnection();
+    string q = "select distinct city from naatkhuwaan";
+    SqlDataReader sdr = db.GetData(q);
+    while (sdr.Read())
+    {
+        cities.Add(new SelectListItem
+        {
+            Text = sdr[0].ToString(),
+            Value = sdr[0].ToString()
+        });
+    }
+    sdr.Close();
+    db.CloseConnection();
+}
+
+<div class="container mt-5">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="page-title">🎤 All NaatKhuwaan</h2>
+
+        @Html.ActionLink("➕ Create New", "SignUp", null,
+        new { @class = "btn btn-success px-4 shadow-sm" })
+    </div>
+
+    <!-- Search Section -->
+    <div class="card search-card shadow mb-4 p-3">
+        @using (Html.BeginForm())
+        {
+            <div class="row align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Select City</label>
+                    @Html.DropDownList("city", cities, "Select City",
+                    new { @class = "form-select" })
+            </div>
+
+            <div class="col-md-2">
+                <input type="submit"
+                       value="🔍 Search"
+                       class="btn btn-primary w-100 mt-2" />
+            </div>
+        </div>
+                }
+    </div>
+
+    <!-- Table Section -->
+    <div class="card list-card">
+        <div class="card-body p-0">
+
+            <table class="table table-hover table-bordered text-center align-middle table-green mb-0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th width="220">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="4" class="text-muted py-4">
+                                No records found.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var nk in Model)
+                        {
+                            <tr>
+                                <td>@nk.nkid</td>
+                                <td class="fw-semibold text-capitalize">@nk.name</td>
+                                <td>@nk.city</td>
+                                <td class="action-btns">
+                                    @Html.ActionLink("Detail", "Detail",
+                                    new { nkid = nk.nkid },
+                                                        new { @class = "btn btn-primary btn-sm px-3 shadow-sm" })
+
+                            @Html.ActionLink("Edit", "Edit",
+                                                        new { nkid = nk.nkid },
+                                                        new { @class = "btn btn-secondary btn-sm px-3 shadow-sm" })
+
+                            @Html.ActionLink("Delete", "Delete",
+                                                        new { nkid = nk.nkid },
+                                                        new { @class = "btn btn-danger btn-sm px-3 shadow-sm" })
+                        </td>
+                    </tr>
+                                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>

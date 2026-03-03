@@ -1,0 +1,50 @@
+﻿@* <dl>
+    <dt>User=</dt>
+    <dd>@Context.Session.GetString("nkid")</dd>
+    <dt>Name=</dt>
+    <dd>@Context.Session.GetString("name")</dd>
+</dl>
+<h2 align="center">NaatKhuwaan Dasboard</h2> *@
+@{
+    var nkid = Context.Session.GetString("nkid");
+    var name = Context.Session.GetString("name");
+}
+
+<div class="container mt-5">
+    <div class="card dashboard-card">
+
+        <!-- Header -->
+        <div class="dashboard-header text-center">
+            <h2>🎤 NaatKhuwaan Dashboard</h2>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-4">
+
+            <div class="mb-4 text-center welcome-text">
+                Welcome, @name 👋
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 dashboard-label">User ID:</div>
+                <div class="col-md-8 dashboard-value">@nkid</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 dashboard-label">Name:</div>
+                <div class="col-md-8 dashboard-value">@name</div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer text-end">
+            <a asp-controller="NaatKhuwan"
+               asp-action="AllNK"
+               class="btn btn-primary px-4">
+                View All NaatKhuwaans
+            </a>
+        </div>
+
+    </div>
+</div>
