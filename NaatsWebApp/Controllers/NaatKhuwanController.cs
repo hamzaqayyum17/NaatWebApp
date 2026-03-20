@@ -2,6 +2,7 @@
 using NaatsWebApp.Models;
 using System.Data.SqlClient;
 
+
 namespace NaatsWebApp.Controllers
 {
     public class NaatKhuwanController : Controller
@@ -27,7 +28,7 @@ namespace NaatsWebApp.Controllers
                 string q = "insert into NaatKhuwaan Values('" + nk.nkid + "','" + nk.name + "','" + nk.city + "','" + nk.gender + "','" + nk.isAlive + "','" + nk.email + "','" + nk.password + "')";
                 Db.IUD(q);
                 Db.CloseConnection();
-                
+                //return RedirectToAction("SignIn");
             }
             return View(nk);
         }

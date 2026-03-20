@@ -5,10 +5,14 @@ namespace NaatsWebApp.Models
 {
     public class DBAccess
     {
-        static string constr = "Data Source=DESKTOP-ICNAA62\\SQLEXPRESS;" +
-                               "Initial Catalog=NaatDB;" +
-                               "Integrated Security=True;" +
-                               "TrustServerCertificate=True;";
+        //static string constr = "Data Source=DESKTOP-ICNAA62\\SQLEXPRESS;" +
+        //                       "Initial Catalog=NaatDB;" +
+        //                       "Integrated Security=True;" +
+        //                       "TrustServerCertificate=True;";
+        static string constr = "Data Source=DESKTOP-ICNAA62;" +
+                       "Initial Catalog=NaatDB;" +
+                       "Integrated Security=True;" +
+                       "TrustServerCertificate=True;";
 
         SqlConnection con = new SqlConnection(constr);
         SqlCommand cmd = null;

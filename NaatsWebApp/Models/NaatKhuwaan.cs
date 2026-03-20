@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace NaatsWebApp.Models
 {
@@ -19,5 +21,8 @@ namespace NaatsWebApp.Models
         [StringLength(8)]
         [Display(Name = "Password")]
         public string password { get; set; }
+        [NotMapped]
+        [Compare("password", ErrorMessage = "Passwords do not match!")]
+        public string ConfirmPassword { get; set; }
     }
 }
