@@ -134,21 +134,48 @@ namespace NaatsWebApp.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public IActionResult SignIn(string nkid, string password)
+        //{
+        //    db.OpenConnection();
+        //    string q = $"Select nkid,name from naatkhuwaan where nkid='{nkid}' and password ='{password}'";
+        //    SqlDataReader sdr = db.GetData(q);
+        //    sdr.Read();
+        //    if (sdr.HasRows)
+        //    {
+        //        HttpContext.Session.SetString("nkid", sdr["nkid"].ToString());
+        //        HttpContext.Session.SetString("name", sdr["name"].ToString());
+        //    }
+        //    sdr.Close();
+        //    db.CloseConnection();
+        //    return RedirectToAction("Dashboard");
+        //}
         [HttpPost]
         public IActionResult SignIn(string nkid, string password)
         {
             db.OpenConnection();
-            string q = $"Select nkid,name from naatkhuwaan where nkid='{ nkid }' and password ='{ password }'";
+
+            string q = $"Select nkid,name from naatkhuwaan where nkid='{nkid}' and password='{password}'";
             SqlDataReader sdr = db.GetData(q);
-            sdr.Read();
-            if (sdr.HasRows)
+
+            if (sdr.Read())
             {
                 HttpContext.Session.SetString("nkid", sdr["nkid"].ToString());
                 HttpContext.Session.SetString("name", sdr["name"].ToString());
-            }            
-            sdr.Close();
-            db.CloseConnection();            
-            return RedirectToAction("Dashboard");
+
+                sdr.Close();
+                db.CloseConnection();
+
+                return RedirectToAction("Dashboard"); // ✅ only on success
+            }
+            else
+            {
+                sdr.Close();
+                db.CloseConnection();
+
+                ViewBag.Error = "Invalid ID or Password";
+                return View(); // ❌ stay on login page
+            }
         }
         [HttpGet]
         public IActionResult Dashboard()
