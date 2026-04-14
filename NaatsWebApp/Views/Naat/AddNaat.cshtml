@@ -39,7 +39,11 @@
         <input type="submit" value="Submit" class="btnbtn-primary px-5 py-2 fw-semibold" style="border-radius: 8px;" />
     </div>
 
-} *@
+}
+<div>
+    @Html.ActionLink("View Naats", "ViewNaats", "Naat", new {nkid=sessionid, ano = ano, title=title }, new { @class = "btn btn-primary" })
+</div>
+*@
 @model NaatsWebApp.Models.Naat
 
 @{
@@ -122,4 +126,7 @@
         </div>
     </div>
 
+</div>
+<div>
+    @Html.ActionLink("View Naats", "ViewNaats", "Naat", new { nkid = sessionid, ano = ano, title = title }, new { @class = "btn btn-primary" })
 </div>

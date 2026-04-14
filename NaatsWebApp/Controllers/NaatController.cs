@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NaatsWebApp.Models;
+using System.Data.SqlClient;
+
 
 namespace NaatsWebApp.Controllers
 {
@@ -40,7 +42,27 @@ namespace NaatsWebApp.Controllers
 
             }
             return View(n);
+        }        
+        [HttpGet]
+        public IActionResult ViewNaats(string nkid, int ano)
+        {
 
+            List<Naat> nklist = new List<Naat>();
+            dB.OpenConnection();
+            string q = "select naatpath,nno,naattitle from naat where nkid='" + nkid + "' and ano='" + ano + "'";
+            SqlDataReader sdr = dB.GetData(q);            
+
+            while (sdr.Read())
+            {
+                Naat a = new Naat();
+                a.naatpath = sdr["naatpath"].ToString();
+                a.nno = int.Parse(sdr["nno"].ToString());
+                a.naattitle = sdr["naattitle"].ToString();
+                nklist.Add(a);
+            }
+            sdr.Close();
+            dB.CloseConnection();
+            return View(nklist);
         }
     }
 }
