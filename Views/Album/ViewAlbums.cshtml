@@ -1,0 +1,76 @@
+@model List<NaatsWebApp.Models.Album>
+
+@{
+    ViewData["Title"] = "My Albums";
+    var sessionid   = Context.Session.GetString("nkid");
+    var sessionname = Context.Session.GetString("name");
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold" style="color:#0d3b2e;">My Albums</h2>
+            <p class="text-muted mb-0">
+                User: <strong>@sessionname</strong> &nbsp;|&nbsp; ID: <strong>@sessionid</strong>
+            </p>
+        </div>
+        <a asp-controller="Album" asp-action="CreateAlbum" class="btn btn-success shadow-sm">
+            + New Album
+        </a>
+    </div>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="card text-center py-5">
+            <div class="card-body">
+                <i class="bi bi-disc" style="font-size:3rem; color:#ccc;"></i>
+                <h5 class="mt-3 text-muted">No albums found</h5>
+                <p class="text-muted">Create your first album and start uploading naats.</p>
+                <a asp-controller="Album" asp-action="CreateAlbum" class="btn btn-primary mt-2">
+                    + Create Album
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var album in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card shadow h-100">
+                        <div style="height:200px; background:#f8f9fa; display:flex;
+                                    align-items:center; justify-content:center; overflow:hidden;
+                                    border-radius:15px 15px 0 0;">
+                            @if (!string.IsNullOrEmpty(album.imgpath))
+                            {
+                                <img src="@album.imgpath" class="img-fluid"
+                                     style="max-height:100%; object-fit:contain;" />
+                            }
+                            else
+                            {
+                                <i class="bi bi-disc" style="font-size:4rem; color:#ccc;"></i>
+                            }
+                        </div>
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="fw-semibold mb-1">@album.title</h5>
+                            <p class="text-muted mb-3" style="font-size:13px;">
+                                Album No: @album.ano
+                            </p>
+                            <div class="d-flex gap-2 mt-auto">
+                                @Html.ActionLink("View Naats", "ViewNaats", "Naat",
+                                    new { nkid = sessionid, ano = album.ano, title = album.title },
+                                    new { @class = "btn btn-outline-primary w-50" })
+                                @Html.ActionLink("Add Naat", "AddNaat", "Naat",
+                                    new { ano = album.ano, title = album.title },
+                                    new { @class = "btn btn-primary w-50" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>

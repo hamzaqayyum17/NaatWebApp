@@ -1,0 +1,62 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- HERO SECTION -->
+<div style="background: linear-gradient(rgba(13,59,46,0.88), rgba(20,92,67,0.88));
+            min-height: 380px; display:flex; align-items:center;
+            margin: -80px -12px 0 -12px; padding: 0 12px;">
+    <div class="container text-center text-white py-5">
+        <h1 class="fw-bold mb-3" style="font-size:2.5rem;">
+            Welcome to <span style="color:#ffd700;">NaatKhuwaanWebApp</span>
+        </h1>
+        <p class="lead mb-4" style="opacity:0.88; max-width:520px; margin:0 auto 28px;">
+            A platform to discover, manage, and celebrate the beautiful art of Naat recitation.
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a asp-controller="NaatKhuwan" asp-action="SignIn" class="btn btn-gold btn-lg">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+            </a>
+            <a asp-controller="NaatKhuwan" asp-action="SignUp" class="btn btn-lg btn-outline-light">
+                <i class="bi bi-person-plus me-2"></i>Register
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURES SECTION -->
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold" style="color:#0d3b2e;">What You Can Do</h2>
+        <p class="text-muted">Manage your naats, albums, and profile — all in one place</p>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div style="font-size:2.5rem; margin-bottom:12px;">🎤</div>
+                <h5 class="fw-bold" style="color:#0d3b2e;">Naat Reciter Profiles</h5>
+                <p class="text-muted">Register and manage naat reciter profiles with full details.</p>
+                <a asp-controller="NaatKhuwan" asp-action="AllNK"
+                   class="btn btn-primary mt-auto">View All Reciters</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div style="font-size:2.5rem; margin-bottom:12px;">📀</div>
+                <h5 class="fw-bold" style="color:#0d3b2e;">Albums</h5>
+                <p class="text-muted">Create and organize naat albums for every reciter.</p>
+                <a asp-controller="NaatKhuwan" asp-action="SignIn"
+                   class="btn btn-primary mt-auto">Get Started</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div style="font-size:2.5rem; margin-bottom:12px;">🎵</div>
+                <h5 class="fw-bold" style="color:#0d3b2e;">Naats</h5>
+                <p class="text-muted">Upload and listen to naats directly in your browser.</p>
+                <a asp-controller="NaatKhuwan" asp-action="SignIn"
+                   class="btn btn-primary mt-auto">Listen Now</a>
+            </div>
+        </div>
+    </div>
+</div>

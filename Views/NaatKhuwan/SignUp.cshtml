@@ -1,0 +1,103 @@
+@model NaatsWebApp.Models.NaatKhuwaan
+
+@{
+    ViewData["Title"] = "Register";
+    var cityList = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Rawalpindi", Value = "Rawalpindi" },
+        new SelectListItem { Text = "Islamabad",  Value = "Islamabad"  },
+        new SelectListItem { Text = "Mansehra",   Value = "Mansehra"   },
+        new SelectListItem { Text = "Karachi",    Value = "Karachi"    },
+        new SelectListItem { Text = "Lahore",     Value = "Lahore"     },
+        new SelectListItem { Text = "Peshawar",   Value = "Peshawar"   }
+    };
+}
+
+<h2 class="text-center mb-4 fw-bold" style="color:#0d3b2e;">Register as Naat Reciter</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6" style="width:70%">
+            <div class="card shadow p-4">
+
+                @if (ViewContext.HttpContext.Request.Method == "POST" && ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-success d-flex align-items-center gap-2">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div>
+                            Registration successful! Welcome, <strong>@Model.name</strong>.
+                            <a asp-controller="NaatKhuwan" asp-action="SignIn" class="alert-link ms-2">
+                                Login here →
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                @using (Html.BeginForm())
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        @Html.TextBoxFor(m => m.name,
+                            new { @class = "form-control", placeholder = "Enter full name" })
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.name)</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">City</label>
+                        @Html.DropDownListFor(m => m.city, cityList, "-- Select City --",
+                            new { @class = "form-select" })
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.city)</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label d-block">Gender</label>
+                        <label class="me-4">
+                            @Html.RadioButtonFor(m => m.gender, "M") Male
+                        </label>
+                        <label>
+                            @Html.RadioButtonFor(m => m.gender, "F") Female
+                        </label>
+                        <span class="text-danger d-block">@Html.ValidationMessageFor(m => m.gender)</span>
+                    </div>
+
+                    <div class="mb-3 d-flex align-items-center gap-2">
+                        @Html.CheckBoxFor(m => m.isAlive)
+                        <label class="form-label m-0">Is Alive</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        @Html.TextBoxFor(m => m.email,
+                            new { @class = "form-control", placeholder = "Enter email address", type = "email" })
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.email)</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        @Html.PasswordFor(m => m.password,
+                            new { @class = "form-control", placeholder = "Max 8 characters" })
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.password)</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Confirm Password</label>
+                        @Html.PasswordFor(m => m.ConfirmPassword,
+                            new { @class = "form-control", placeholder = "Re-enter password" })
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-person-check me-2"></i>Register
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-3 register-link">
+                        Already have an account?
+                        <a asp-controller="NaatKhuwan" asp-action="SignIn">Login here</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

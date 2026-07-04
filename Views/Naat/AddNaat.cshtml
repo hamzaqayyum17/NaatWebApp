@@ -1,0 +1,72 @@
+@model NaatsWebApp.Models.Naat
+
+@{
+    ViewData["Title"] = "Add Naat";
+    var sessionid   = Context.Session.GetString("nkid");
+    var sessionname = Context.Session.GetString("name");
+    var ano         = Context.Request.Query["ano"];
+    var title       = Context.Request.Query["title"];
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold" style="color:#0d3b2e;">Add Naat</h2>
+            <p class="text-muted mb-0">Upload a new naat to your album</p>
+        </div>
+        <a asp-controller="Album" asp-action="ViewAlbums" class="btn btn-secondary">
+            Back to Albums
+        </a>
+    </div>
+
+    <div class="card shadow mb-4 p-3 text-center">
+        <p class="mb-1">
+            User: <strong>@sessionname</strong> &nbsp;|&nbsp; ID: @sessionid
+        </p>
+        <p class="mb-0 text-muted">
+            Album No: <strong>@ano</strong> &nbsp;|&nbsp; Title: <strong>@title</strong>
+        </p>
+    </div>
+
+    <div class="card shadow p-4 mb-3">
+        @using (Html.BeginForm("AddNaat", "Naat", FormMethod.Post,
+                                new { enctype = "multipart/form-data" }))
+        {
+            @Html.Hidden("ano", ano)
+
+            <div class="mb-3">
+                <label class="form-label">Naat Number</label>
+                @Html.EditorFor(m => m.nno,
+                    new { htmlAttributes = new { @class = "form-control", min = "1" } })
+                @Html.ValidationMessageFor(m => m.nno, "", new { @class = "text-danger small" })
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Naat Title</label>
+                @Html.EditorFor(m => m.naattitle,
+                    new { htmlAttributes = new { @class = "form-control",
+                                                  placeholder = "Enter naat title" } })
+                @Html.ValidationMessageFor(m => m.naattitle, "", new { @class = "text-danger small" })
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Naat File</label>
+                @Html.TextBoxFor(m => m.naatfile,
+                    new { type = "file", @class = "form-control", accept = ".mp3,.mp4,.mpeg" })
+                <div class="form-text">Allowed formats: mp3, mp4, mpeg</div>
+            </div>
+
+            <div class="text-end">
+                <input type="submit" value="Upload Naat" class="btn btn-primary px-4" />
+            </div>
+        }
+    </div>
+
+    <div class="text-center">
+        @Html.ActionLink("View All Naats in This Album", "ViewNaats", "Naat",
+            new { nkid = sessionid, ano = ano, title = title },
+            new { @class = "btn btn-outline-primary" })
+    </div>
+
+</div>

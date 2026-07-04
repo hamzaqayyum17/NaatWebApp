@@ -1,0 +1,66 @@
+@model NaatsWebApp.Models.Album
+
+@{
+    ViewData["Title"] = "Create Album";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold" style="color:#0d3b2e;">Create Album</h2>
+            <p class="text-muted mb-0">Add a new album to your collection</p>
+        </div>
+        <a asp-controller="Album" asp-action="ViewAlbums" class="btn btn-secondary">
+            Back to Albums
+        </a>
+    </div>
+
+    <div class="card shadow mb-4 p-3 text-center">
+        <h6 class="mb-0">
+            User: <strong>@Context.Session.GetString("name")</strong>
+            &nbsp;|&nbsp; ID: @Context.Session.GetString("nkid")
+        </h6>
+    </div>
+
+    <div class="card shadow p-4">
+        @using (Html.BeginForm("CreateAlbum", "Album", FormMethod.Post,
+                                new { enctype = "multipart/form-data" }))
+        {
+            <div class="mb-3">
+                <label class="form-label">Album Number</label>
+                @Html.EditorFor(m => m.ano,
+                    new { htmlAttributes = new { @class = "form-control", min = "1" } })
+                @Html.ValidationMessageFor(m => m.ano, "", new { @class = "text-danger small" })
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Album Title</label>
+                @Html.EditorFor(m => m.title,
+                    new { htmlAttributes = new { @class = "form-control",
+                                                  placeholder = "Enter album title" } })
+                @Html.ValidationMessageFor(m => m.title, "", new { @class = "text-danger small" })
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Year</label>
+                @Html.EditorFor(m => m.year,
+                    new { htmlAttributes = new { @class = "form-control",
+                                                  min = "1900", max = "2025" } })
+                @Html.ValidationMessageFor(m => m.year, "", new { @class = "text-danger small" })
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Cover Image</label>
+                @Html.TextBoxFor(m => m.imgfile,
+                    new { type = "file", @class = "form-control",
+                          accept = ".jpg,.jpeg,.png,.gif,.bmp" })
+                <div class="form-text">Allowed formats: jpg, jpeg, png, gif, bmp</div>
+            </div>
+
+            <div class="text-end">
+                <input type="submit" value="Create Album" class="btn btn-primary px-4" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,63 @@
+@model NaatsWebApp.Models.NaatKhuwaan
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2 class="text-center mb-4 login-title">Login</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6" style="width:70%">
+            <div class="card login-card p-4">
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger d-flex align-items-center gap-2" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <span>@ViewBag.Error</span>
+                    </div>
+                }
+
+                @using (Html.BeginForm())
+                {
+                    <div class="mb-3">
+                        <label class="form-label">User ID</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+                            @Html.TextBoxFor(m => m.nkid,
+                                new { @class = "form-control", placeholder = "Enter your User ID" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.nkid)</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill"></i>
+                            </span>
+                            @Html.PasswordFor(m => m.password,
+                                new { @class = "form-control", placeholder = "Enter your password" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.password)</span>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-3 register-link">
+                        Don't have an account?
+                        <a asp-controller="NaatKhuwan" asp-action="SignUp">Create Account</a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
