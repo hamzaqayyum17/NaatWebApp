@@ -1,0 +1,86 @@
+﻿@* @model NaatsWebApp.Models.NaatKhuwaan
+
+<h1>Detail</h1>
+<b>Nkid=</b>@Model.nkid<br />
+<b>Nmae=</b>@Model.name<br />
+<b>City=</b>@Model.city<br />
+<b>Gender=</b>@Model.gender<br />
+<b>Is Alive=</b>@Model.isAlive<br />
+<b>Email=</b>@Model.email<br />
+ *@
+ 
+
+@model NaatsWebApp.Models.NaatKhuwaan
+
+<div class="container mt-5">
+    <div class="card detail-card">
+
+        <!-- Header -->
+        <div class="detail-header">
+            <h3 class="mb-0">🎤 NaatKhuwaan Profile Detail</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body p-4">
+
+            <div class="row mb-3">
+                <div class="col-md-4 detail-label">Nkid:</div>
+                <div class="col-md-8 detail-value">@Model.nkid</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 detail-label">Name:</div>
+                <div class="col-md-8 detail-value">@Model.name</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 detail-label">City:</div>
+                <div class="col-md-8 detail-value">@Model.city</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 detail-label">Gender:</div>
+                <div class="col-md-8 detail-value">
+                    @(Model.gender == 'M' ? "Male" : "Female")
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 detail-label">Status:</div>
+                <div class="col-md-8">
+                    @if (Model.isAlive)
+                    {
+                        <span class="badge bg-success badge-status">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger badge-status">Deceased</span>
+                    }
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4 detail-label">Email:</div>
+                <div class="col-md-8 detail-value">@Model.email</div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer detail-footer d-flex justify-content-between px-4 py-3">
+            <a asp-controller="NaatKhuwan" 
+               asp-action="AllNK" 
+               class="btn btn-secondary px-4">
+                ← Back
+            </a>
+
+            <a asp-controller="NaatKhuwan"
+               asp-action="Edit"
+               asp-route-nkid="@Model.nkid"
+               class="btn btn-primary px-4">
+                Edit Profile
+            </a>
+        </div>
+
+    </div>
+</div>

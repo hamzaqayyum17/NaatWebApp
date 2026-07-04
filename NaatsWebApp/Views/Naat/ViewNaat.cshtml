@@ -1,0 +1,28 @@
+﻿@model List<NaatsWebApp.Models.Naat>
+
+@{
+    var sessionid = Context.Session.GetString("nkid");
+    var sessionname = Context.Session.GetString("name");
+    var ano = Context.Request.Query["ano"];
+    var title = Context.Request.Query["title"];
+}
+<table>
+    <tr><td> <b>User :</b> @sessionid </td> <td><b>Name :</b> @sessionname</td></tr>
+    <tr> <td><b>Album No:</b> @ano</td><td><b>Title :</b> @title </td></tr>
+</table>
+
+<h2> All Naats</h2>
+<table>
+    @foreach (var naat in Model)
+    {
+        <tr>
+            <td>@naat.nno</td>
+            <td>@naat.naattitle</td>
+            <td>
+                <audio controls>
+                    <source src=@naat.naatpath type="audio/mpeg">
+                </audio>
+            </td>
+        </tr>
+    }
+</table>

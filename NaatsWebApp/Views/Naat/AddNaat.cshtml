@@ -1,0 +1,132 @@
+﻿@* @model NaatsWebApp.Models.Naat
+
+@{
+    var sessionid = Context.Session.GetString("nkid");
+    var sessionname = Context.Session.GetString("name");
+    var ano = Context.Request.Query["ano"];
+    var title = Context.Request.Query["title"];
+}
+<table>
+    <tr>
+        <td> <b>User :</b> @sessionid </td>
+        <td><b>Name :</b> @sessionname</td>
+    </tr>
+
+    <tr>
+        <td><b>Album No:</b> @ano</td>
+        <td><b>Title :</b> @title </td>
+    </tr>
+</table>
+@using (Html.BeginForm("AddNaat", "Naat", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("ano", ano)
+    <div class="mb-3">
+        @Html.LabelFor(model => model.nno, new { @class = "form-label fw-semibold" })
+        @Html.EditorFor(model => model.nno, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.naattitle, new { @class = "form-label fw-semibold" })
+        @Html.EditorFor(model => model.naattitle, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+    </div>
+
+    <div class="mb-4">
+        @Html.LabelFor(model => model.naatfile, "Choose Naat", new { @class = "form-label fw-semibold" })
+        @Html.TextBoxFor(model => model.naatfile, new { type = "file", @class = "form-control shadow-sm" })
+    </div>
+
+    <div class="text-center">
+        <input type="submit" value="Submit" class="btnbtn-primary px-5 py-2 fw-semibold" style="border-radius: 8px;" />
+    </div>
+
+}
+<div>
+    @Html.ActionLink("View Naats", "ViewNaats", "Naat", new {nkid=sessionid, ano = ano, title=title }, new { @class = "btn btn-primary" })
+</div>
+*@
+@model NaatsWebApp.Models.Naat
+
+@{
+    var sessionid = Context.Session.GetString("nkid");
+    var sessionname = Context.Session.GetString("name");
+    var ano = Context.Request.Query["ano"];
+    var title = Context.Request.Query["title"];
+}
+
+<div class="container mt-5">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-primary mb-0">🎵 Add Naat</h2>
+            <p class="text-muted mb-0">Upload a new naat to your album</p>
+        </div>
+
+        <!-- Back Button -->
+        <a href="/Album/ViewAlbums" class="btn btn-secondary shadow-sm">
+            ⬅ Back
+        </a>
+    </div>
+
+    <!-- User + Album Info -->
+    <div class="card shadow mb-4">
+        <div class="card-body text-center">
+            <h5 class="mb-1">👤 @sessionname</h5>
+            <p class="text-muted mb-2">User ID: <b>@sessionid</b></p>
+
+            <hr />
+
+            <p class="mb-1"><b>Album No:</b> @ano</p>
+            <p class="mb-0"><b>Title:</b> @title</p>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="card shadow">
+        <div class="card-body p-4">
+
+            @using (Html.BeginForm("AddNaat", "Naat", FormMethod.Post,
+                                    new { enctype = "multipart/form-data" }))
+            {
+                @Html.Hidden("ano", ano)
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.nno,
+                        new { @class = "form-label fw-bold" })
+                    @Html.EditorFor(model => model.nno,
+                        new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.naattitle,
+                        new { @class = "form-label fw-bold" })
+                    @Html.EditorFor(model => model.naattitle,
+                        new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="mb-4">
+                    @Html.LabelFor(model => model.naatfile, "Choose Naat",
+                        new { @class = "form-label fw-bold" })
+                    @Html.TextBoxFor(model => model.naatfile,
+                        new { type = "file", @class = "form-control" })
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between">
+
+                    <a href="/Album/ViewAlbums" class="btn btn-outline-secondary">
+                        ⬅ Back
+                    </a>
+
+                    <input type="submit" value="🎵 Submit"
+                           class="btn btn-primary px-4 shadow-sm" />
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>
+<div>
+    @Html.ActionLink("View Naats", "ViewNaats", "Naat", new { nkid = sessionid, ano = ano, title = title }, new { @class = "btn btn-primary" })
+</div>
